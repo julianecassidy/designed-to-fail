@@ -114,6 +114,8 @@ def login():
 
     user = Auth.login(
         name=request.json["name"],
+    user = Login.login(
+        email=request.json["email"],
         password=request.json["password"]
     )
 
