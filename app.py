@@ -104,7 +104,6 @@ def signup():
     token = User.create_token(request.json["username"])
     return jsonify(token)
 
-
 @app.post('/login')
 def login():
     """Handle user login. Take JSON email/username and password:
@@ -113,17 +112,17 @@ def login():
     
     Return JWT string if valid user. If invalid, throw Unauthorized Error."""
 
-    user = User.login(
-        username=request.json["username"],
+    user = Auth.login(
+        name=request.json["name"],
         password=request.json["password"]
     )
 
     if user:
-        token = User.create_token(user.username)
+        token = Auth.create_token(user.name)
         return jsonify(token)
     
     else:
-        raise Unauthorized("Username/password invalid.")
+        raise Unauthorized("Name/password invalid.")
     
 
 #################################################################### User Routes
