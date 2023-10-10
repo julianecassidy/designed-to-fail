@@ -112,15 +112,13 @@ def login():
     
     Return JWT string if valid user. If invalid, throw Unauthorized Error."""
 
-    user = Auth.login(
-        name=request.json["name"],
     user = Login.login(
         email=request.json["email"],
         password=request.json["password"]
     )
 
     if user:
-        token = Auth.create_token(user.name)
+        token = Auth.create_token(user.email)
         return jsonify(token)
     
     else:
